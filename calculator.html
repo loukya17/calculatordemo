@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #calculator {
+            width: 300px;
+            margin: 50px auto;
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            font-size: 20px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="calculator">
+        <input type="text" id="display" disabled>
+        <button class="btn" onclick="clearDisplay()">C</button>
+        <button class="btn" onclick="appendToDisplay('7')">7</button>
+        <button class="btn" onclick="appendToDisplay('8')">8</button>
+        <button class="btn" onclick="appendToDisplay('9')">9</button>
+        <button class="btn" onclick="appendToDisplay('+')">+</button>
+        <button class="btn" onclick="appendToDisplay('4')">4</button>
+        <button class="btn" onclick="appendToDisplay('5')">5</button>
+        <button class="btn" onclick="appendToDisplay('6')">6</button>
+        <button class="btn" onclick="appendToDisplay('-')">-</button>
+        <button class="btn" onclick="appendToDisplay('1')">1</button>
+        <button class="btn" onclick="appendToDisplay('2')">2</button>
+        <button class="btn" onclick="appendToDisplay('3')">3</button>
+        <button class="btn" onclick="appendToDisplay('*')">*</button>
+        <button class="btn" onclick="appendToDisplay('0')">0</button>
+        <button class="btn" onclick="appendToDisplay('.')">.</button>
+        <button class="btn" onclick="calculate()">=</button>
+        <button class="btn" onclick="appendToDisplay('/')">/</button>
+        <button class="btn" onclick="squareRoot()">√</button>
+        <button class="btn" onclick="power()">^</button>
+        <button class="btn" onclick="clearLastCharacter()">←</button>
+    </div>
+
+    <script>
+        function appendToDisplay(value) {
+            document.getElementById('display').value += value;
+        }
+
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+
+        function calculate() {
+            try {
+                const result = eval(document.getElementById('display').value);
+                document.getElementById('display').value = result;
+            } catch (error) {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+
+        function squareRoot() {
+            const value = parseFloat(document.getElementById('display').value);
+            if (!isNaN(value)) {
+                document.getElementById('display').value = Math.sqrt(value);
+            }
+        }
+
+        function power() {
+            appendToDisplay("**");
+        }
+
+        function clearLastCharacter() {
+            const currentValue = document.getElementById('display').value;
+            document.getElementById('display').value = currentValue.slice(0, -1);
+        }
+    </script>
+</body>
+</html>
